@@ -10,6 +10,25 @@ function convertToRoman(num) {
     };
 
   //your code here
+	 const romanNumerals = [];
+    const entries = Object.values(obj);
+
+    for (let i = 0; i < entries.length; i++) {
+        let [symbol, value] = entries[i];
+        while (num >= value) {
+            romanNumerals.push(symbol);
+            num -= value;
+        }
+        if (i % 2 === 0 && i < entries.length - 1) {
+            let nextSymbolValue = entries[i + 2][1];
+            if (num >= value - nextSymbolValue) {
+                romanNumerals.push(entries[i + 2][0] + symbol);
+                num -= value - nextSymbolValue;
+            }
+        }
+    }
+
+    return romanNumerals.join('');
 
 }
 // You can test your code by running the above function and printing it to console by pressing the run button at the top. To run it with input 36, uncomment the following line
