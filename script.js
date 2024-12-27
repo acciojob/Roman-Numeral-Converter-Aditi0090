@@ -1,42 +1,42 @@
 function convertToRoman(num) {
-  	const obj = {
-      0:['M',1000], 
-      1:['D', 500], 
-      2:['C', 100], 
-      3:['L', 50], 
-      4:['X', 10], 
-      5:['V', 5], 
-      6:['I', 1]
-    };
+    if (num === 0) return ''; // Special case for 0 as Roman numerals don't represent it
 
-  //your code here
-	 const romanNumerals = [];
-    const entries = Object.values(obj);
+    const obj = [
+        ['M', 1000], 
+        ['CM', 900], 
+        ['D', 500], 
+        ['CD', 400], 
+        ['C', 100], 
+        ['XC', 90], 
+        ['L', 50], 
+        ['XL', 40], 
+        ['X', 10], 
+        ['IX', 9], 
+        ['V', 5], 
+        ['IV', 4], 
+        ['I', 1]
+    ];
 
-    for (let i = 0; i < entries.length; i++) {
-        let [symbol, value] = entries[i];
+    let romanNumerals = '';
+
+    for (let i = 0; i < obj.length; i++) {
+        const [symbol, value] = obj[i];
         while (num >= value) {
-            romanNumerals.push(symbol);
+            romanNumerals += symbol;
             num -= value;
-        }
-        if (i % 2 === 0 && i < entries.length - 1) {
-            let nextSymbolValue = entries[i + 2][1];
-            if (num >= value - nextSymbolValue) {
-                romanNumerals.push(entries[i + 2][0] + symbol);
-                num -= value - nextSymbolValue;
-            }
         }
     }
 
-    return romanNumerals.join('');
-
+    return romanNumerals;
 }
-// You can test your code by running the above function and printing it to console by pressing the run button at the top. To run it with input 36, uncomment the following line
 
-// console.log(convertToRoman(36));
-
-
-
+// Test the function with multiple cases
+console.log(convertToRoman(14));      // Output: XIV
+console.log(convertToRoman(798));     // Output: DCCXCVIII
+console.log(convertToRoman(36));      // Output: XXXVI
+console.log(convertToRoman(0));       // Output: ''
+console.log(convertToRoman(3999));    // Output: MMMCMXCIX
+console.log(convertToRoman(100000));  // Output: (Not valid for traditional Roman numerals)
 
 // do not edit below this line
-module.exports = convertToRoman
+module.exports = convertToRoman;
